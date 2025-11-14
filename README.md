@@ -13,6 +13,15 @@ The system is built with a modular architecture consisting of three main compone
 - **Weather_Forcast_Api**: FastAPI-based REST API for serving predictions
 - **App**: Streamlit web application for user interaction
 
+## 📖 Project Descriptions
+
+### Non-Technical Description (For HR)
+View this product at - https://digitalappuctweatherprediction-tfdvs8zextpi3xvktbpogy.streamlit.app/
+This weather prediction digital product is an innovative tool that helps businesses and individuals make informed decisions based on accurate weather forecasts. It predicts whether it will rain in exactly 7 days and estimates cumulative precipitation over the next 3 days, using advanced machine learning algorithms. The system includes a user-friendly web application for easy access, a reliable API for seamless integration into other systems, and is deployed in the cloud for 24/7 availability. It's particularly valuable for industries such as agriculture (planning irrigation and harvests), logistics (optimizing routes and schedules), event management (weather contingency planning), and operations management (reducing weather-related risks and delays). By providing reliable weather insights, this product helps organizations minimize uncertainties, improve planning, and enhance operational efficiency.
+
+### Technical Description (For Interviewer)
+This project implements a comprehensive weather prediction system using ensemble machine learning techniques. The architecture follows a modular design with three main components: an ML pipeline for model development and evaluation, a FastAPI-based REST API for serving predictions, and a Streamlit web application for user interaction. The ML models employ ensemble methods combining CatBoost, XGBoost, LightGBM, GradientBoosting, and GaussianNB classifiers, trained on historical weather data with over 50 features including temperature, humidity, wind patterns, cloud cover, and soil moisture. The system integrates real-time weather data from the Open-Meteo API and uses time-based cross-validation to prevent data leakage. Key technical challenges addressed include handling time-series data, optimizing for high recall in rain prediction to minimize false negatives, implementing robust error handling for missing values, and ensuring scalable deployment through Docker containerization. The API is hosted on Render with automatic health checks and Swagger documentation, while the web app runs on Streamlit Cloud, demonstrating full-stack development from data science to production deployment.
+
 ## 🚀 Key Features
 
 - **Accurate Predictions**: Uses ensemble ML models (CatBoost, XGBoost, LightGBM) trained on comprehensive weather data
@@ -26,16 +35,11 @@ The system is built with a modular architecture consisting of three main compone
 
 ```
 Weather_Prediction_Digital_Product/
-├── ML_Model/              # Machine Learning Pipeline
-│   ├── notebooks/         # Jupyter notebooks for experiments
-│   ├── ml_model/          # Source code for data processing and modeling
-│   ├── models/            # Trained model artifacts
-│   └── data/              # Raw and processed datasets
-├── Weather_Forcast_Api/   # REST API Service
-│   ├── app/               # FastAPI application
-│   ├── models/            # Serialized models for inference
-│   └── Dockerfile         # Container configuration
-└── App/                   # Web Application
+├── ML_Model/              # Machine Learning Pipeline for the product
+│   
+├── Weather_Forcast_Api/   # REST API Service creatred for ML model deployment
+│   
+└── App/                   # Web Application with user frindly usage.
     └── App_main.py        # Streamlit interface
 ```
 
@@ -43,15 +47,15 @@ Weather_Prediction_Digital_Product/
 
 ### Rain Prediction Model
 - **Type**: Binary Classification
-- **Target**: Will it rain in exactly 7 days?
+- **Target**: Will it rain in exactly next 7 days?
 - **Algorithm**: Ensemble of CatBoost, XGBoost, LightGBM, GradientBoosting, GaussianNB
-- **Evaluation**: Focus on recall to minimize missed rainy periods
+
 
 ### Precipitation Prediction Model
 - **Type**: Regression
 - **Target**: Cumulative precipitation (mm) over next 3 days
 - **Algorithm**: Ensemble of advanced ML models
-- **Evaluation**: MAE/RMSE metrics for accuracy assessment
+
 
 ## 🔧 Quick Start
 
@@ -94,20 +98,8 @@ poetry install
 poetry run jupyter lab
 ```
 
-## 🐳 Docker Deployment
 
-### API Container
-```bash
-cd Weather_Forcast_Api
-docker build -t weather-prediction-api .
-docker run -p 8000:8000 weather-prediction-api
-```
 
-### Pull from Docker Hub
-```bash
-docker pull doombuoyz/weather-prediction-api:latest
-docker run -p 8000:8000 doombuoyz/weather-prediction-api:latest
-```
 
 ## 📚 API Documentation
 
