@@ -1,0 +1,52 @@
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[project]
+name = "ml_model"
+version = "0.0.1"
+description = "To be written soon!"
+authors = [
+  { name = "Agam Singh Saini" },
+]
+license = { file = "LICENSE" }
+readme = "README.md"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License"
+]
+dependencies = [
+    "black",
+    "flake8",
+    "isort",
+    "loguru",
+    "pip",
+    "python-dotenv",
+    "tqdm",
+    "typer",
+    "openmeteo-requests (>=1.7.2,<2.0.0)",
+    "requests-cache (>=1.2.1,<2.0.0)",
+    "retry-requests (>=2.0.0,<3.0.0)",
+    "numpy (>=2.3.3,<3.0.0)",
+    "pandas (>=2.3.2,<3.0.0)",
+    "matplotlib (>=3.10.6,<4.0.0)",
+    "seaborn (>=0.13.2,<0.14.0)",
+]
+requires-python = "^3.11.0"
+
+[tool.black]
+line-length = 99
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.venv
+)/
+'''
+
+[tool.isort]
+profile = "black"
+known_first_party = ["ml_model"]
+force_sort_within_sections = true
+
+

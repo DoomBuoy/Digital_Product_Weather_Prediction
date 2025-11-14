@@ -1,0 +1,23 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+.git
+.gitignore
+README.md
+.dockerignore
+Dockerfile*
+docker-compose*
+.pytest_cache/
+.coverage
+.vscode/
+.idea/
+*.log
+
+# Keep these files/directories
+!models/
+!app/
+!data/
+!src.py
+!requirements.txt
