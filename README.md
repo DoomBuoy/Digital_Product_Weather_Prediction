@@ -67,7 +67,7 @@ cd Weather_Prediction_Digital_Product
 ```
 
 ### 2. Try the Live Application
-Visit the deployed Streamlit app: [Weather Prediction App](https://weather-prediction-app.streamlit.app/)
+Visit the deployed Streamlit app: [Weather Prediction App](https://digitalappuctweatherprediction-tfdvs8zextpi3xvktbpogy.streamlit.app/)
 
 Or access the live API directly: [Weather Prediction API](https://weather-prediction-api-isp4.onrender.com)
 
@@ -173,7 +173,7 @@ This project is for internal use. Contact the project owner for licensing detail
 ## 🔗 Links
 
 - **Live API**: https://weather-prediction-api-isp4.onrender.com
-- **Live App**: https://weather-prediction-app.streamlit.app/
+- **Live App**: https://digitalappuctweatherprediction-tfdvs8zextpi3xvktbpogy.streamlit.app/
 - **API Docs**: https://weather-prediction-api-isp4.onrender.com/docs
 - **Docker Hub**: https://hub.docker.com/r/doombuoyz/weather-prediction-api
 
