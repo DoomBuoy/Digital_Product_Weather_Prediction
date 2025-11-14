@@ -9,14 +9,20 @@ from retry_requests import retry
 # Check if the API is live
 st.markdown("🔍 Checking API status...")
 try:
-    response = requests.get("https://weather-prediction-api-isp4.onrender.com/health/", timeout=10)
+    response = requests.get("https://weather-prediction-api-isp4.onrender.com/health/", timeout=30)
     if response.status_code == 200:
         st.success("✅ API is awake and ready for prediction")
-    else:
-        st.error("⏳ Please wait for 2 min, the app is waking up the prediction API. Refresh the page after a couple of minutes.")
+    elif response.status_code == 503:
+        st.error("⏳ The prediction API is sleeping. Please wait 2-3 minutes for it to wake up, then refresh the page.")
         st.stop()
-except requests.exceptions.RequestException:
-    st.error("❌ Unable to connect to the prediction API. Please check your internet connection and try again later.")
+    else:
+        st.error(f"⚠️ API returned status {response.status_code}. Please wait a moment and try again.")
+        st.stop()
+except requests.exceptions.RequestException as e:
+    if "timeout" in str(e).lower():
+        st.error("⏳ The prediction API is taking too long to respond (likely sleeping). Please wait 2-3 minutes and refresh the page.")
+    else:
+        st.error("❌ Unable to connect to the prediction API. Please check your internet connection and try again later.")
     st.stop()
 
 # Setup for weather data fetching
