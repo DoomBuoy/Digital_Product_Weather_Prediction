@@ -7,23 +7,30 @@ import requests_cache
 from retry_requests import retry
 
 # Check if the API is live
-st.markdown("🔍 Checking API status...")
-try:
-    response = requests.get("https://weather-prediction-api-isp4.onrender.com/health/", timeout=30)
-    if response.status_code == 200:
-        st.success("✅ API is awake and ready for prediction")
-    elif response.status_code == 503:
-        st.error("⏳ The prediction API is sleeping. Please wait 2-3 minutes for it to wake up, then refresh the page.")
+with st.spinner("🔍 Checking API status..."):
+    try:
+        response = requests.get("https://weather-prediction-api-isp4.onrender.com/health/", timeout=30)
+        if response.status_code == 200:
+            st.success("✅ API is ready! You can now make predictions.")
+        else:
+            st.warning(f"⚠️ API returned status code {response.status_code}")
+            st.info("💡 **Tip:** The API might be starting up. Free tier services on Render spin down after inactivity and take 2-3 minutes to wake up. Please wait a moment and refresh the page.")
+            st.stop()
+    except requests.exceptions.Timeout:
+        st.error("⏳ **API Response Timeout**")
+        st.info("💡 **What's happening?** The API is likely sleeping due to inactivity (free tier limitation). It typically takes 2-3 minutes to wake up.")
+        st.markdown("**Please:**\n1. Wait 2-3 minutes\n2. Refresh this page\n3. The API should be ready!")
         st.stop()
-    else:
-        st.error(f"⚠️ API returned status {response.status_code}. Please wait a moment and try again.")
+    except requests.exceptions.ConnectionError:
+        st.error("❌ **Unable to Connect to API**")
+        st.info("💡 **Possible reasons:**\n- Your internet connection may be down\n- The API service might be temporarily unavailable\n- Network firewall blocking the connection")
+        st.markdown("**Please:**\n1. Check your internet connection\n2. Wait a moment and refresh the page\n3. If the issue persists, try again later")
         st.stop()
-except requests.exceptions.RequestException as e:
-    if "timeout" in str(e).lower():
-        st.error("⏳ The prediction API is taking too long to respond (likely sleeping). Please wait 2-3 minutes and refresh the page.")
-    else:
-        st.error("❌ Unable to connect to the prediction API. Please check your internet connection and try again later.")
-    st.stop()
+    except requests.exceptions.RequestException as e:
+        st.error(f"❌ **Unexpected Error**")
+        st.warning(f"Error details: {str(e)}")
+        st.info("💡 Please wait a moment and refresh the page. If the problem continues, the API service may be experiencing issues.")
+        st.stop()
 
 # Setup for weather data fetching
 cache_session = requests_cache.CachedSession('.cache', expire_after=3600)
